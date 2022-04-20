@@ -7,7 +7,7 @@ This is simple shell script to help us switch kubectl contexts quickly. I avoid 
 You may need to check if directory `/usr/local/bin/` exist in your environment `$PATH`.
 
 ```
-$ git clone git@github.com:cuongquach/kube-profiles.git
+$ git clone https://github.com/cuongquach/kube-profiles.git
 $ chmod +x kube-profiles.sh
 $ mv kube-profiles.sh /usr/local/bin/kube-profiles
 ```
