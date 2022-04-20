@@ -8,6 +8,7 @@ You may need to check if directory `/usr/local/bin/` exist in your environment `
 
 ```
 $ git clone https://github.com/cuongquach/kube-profiles.git
+$ cd kube-profiles
 $ chmod +x kube-profiles.sh
 $ mv kube-profiles.sh /usr/local/bin/kube-profiles
 ```
