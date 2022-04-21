@@ -9,7 +9,7 @@ DEFAULT_KUBE_CONFIG_DIR="$HOME/.kube/config"
 echo "List of kubectl contexts in your local:"
 echo ""
 
-cat ${DEFAULT_KUBE_CONFIG_DIR} | grep -i -A4 "\- context:" | grep -i "name:" | awk -F'name:' '{print $2}' | tr -d ' ' > ${FILE_TMP}
+cat ${DEFAULT_KUBE_CONFIG_DIR} | grep -i -A4 "\- context:" | grep -i "name:" | awk -F'name:' '{print $2}' | sort | uniq | tr -d ' ' > ${FILE_TMP}
 cat -n ${FILE_TMP}
 
 echo ""
