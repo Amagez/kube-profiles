@@ -16,6 +16,13 @@ echo ""
 echo "Which kubectl contexts that you want to use [number] ? "
 read -p "Number: " no_context
 
+# Check if answer is in list kubectl contexts
+if [[ ! $(cat -n ${FILE_TMP} | grep "^[[:space:]]*${no_context}") ]];then
+    echo ""
+    echo "ERROR: your choice number is not correct. Please choose correct number in console. "
+    exit 1
+fi
+
 echo ""
 context_name=$(sed -n ${no_context}p $FILE_TMP)
 kubectl config use-context $context_name
