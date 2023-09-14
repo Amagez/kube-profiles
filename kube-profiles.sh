@@ -14,7 +14,13 @@ cat -n ${FILE_TMP}
 
 echo ""
 echo "Which kubectl contexts that you want to use [number] ? "
-read -p "Number: " no_context
+
+if [[ -z $1 ]];then
+    read -p "Number: " no_context
+else
+    no_context=$1
+    echo "Number: ${no_context}"
+fi
 
 # Check if answer is in list kubectl contexts
 if [[ ! $(cat -n ${FILE_TMP} | grep "^[[:space:]]*${no_context}") ]];then
@@ -23,8 +29,11 @@ if [[ ! $(cat -n ${FILE_TMP} | grep "^[[:space:]]*${no_context}") ]];then
     exit 1
 fi
 
-echo ""
 context_name=$(sed -n ${no_context}p $FILE_TMP)
+echo "Choosen context: $context_name"
+
+echo ""
+
 kubectl config use-context $context_name
 
 new_context_name=$(cat $DEFAULT_KUBE_CONFIG_DIR | grep -i "current-context:" | awk -F':' '{print $2}' | tr -d ' ')
