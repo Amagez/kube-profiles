@@ -5,6 +5,19 @@
 FILE_TMP="/tmp/kubectl-contexts-kube-profiles-$RANDOM.txt"
 DEFAULT_KUBE_CONFIG_DIR="$HOME/.kube/config"
 
+arg1=$1
+if [[ "${arg1}" == "ns" ]];then
+    arg2=$2
+    if [[ -z "${arg2}" ]];then
+        echo "ERROR: missing input namespace to set for current context"
+        exit 1
+    fi
+
+    kubectl config set-context --current --namespace=$arg2
+    echo "Set default namespace for current context: $arg2"
+    exit 0
+fi
+
 # Get list kubectl contexts
 echo "List of kubectl contexts in your local:"
 echo ""
@@ -15,11 +28,11 @@ cat -n ${FILE_TMP}
 echo ""
 echo "Which kubectl contexts that you want to use [number] ? "
 
-if [[ -z $1 ]];then
+if [[ -z $arg1 ]];then
     read -p "Number: " no_context
 else
-    no_context=$1
     echo "Number: ${no_context}"
+    no_context="$arg1"
 fi
 
 # Check if answer is in list kubectl contexts
